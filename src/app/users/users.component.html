@@ -1,0 +1,15 @@
+First name: <input (keyup.enter)="save()" (keyup)="inputYourName($event)"/>
+<br />
+Last name: <input #lastname (keyup.enter)="save()" (keyup)="inputLastName(lastname.value)"/>
+<br />
+<button  (keyup.enter)="save()" (click)="save()">Save</button>
+<br />
+Result = {{ name }}
+<br/>
+<p>Count = {{ done }} / {{users.length}}</p>
+
+<ul *ngIf="show">
+    <li *ngFor="let user of users; index as i" [ngClass]="user.done ? 'cross':'uncross'" (click)="toggle(i)">
+        {{ user.title }}
+    </li>
+</ul>

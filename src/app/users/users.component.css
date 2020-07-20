@@ -1,0 +1,7 @@
+.cross {
+    text-decoration: line-through;
+}
+
+.uncross {
+    text-decoration: none;
+}
