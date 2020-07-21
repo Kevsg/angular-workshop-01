@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
+import { User } from '../models/user'
 
 @Component({
   selector: 'app-users',
@@ -13,8 +13,8 @@ export class UsersComponent implements OnInit {
   firstName = '';
   lastName = '';
   show = true;
-  todos = [
-    {title: "Getting Apple", done: false}
+  todos: User[] = [
+    { title: "Getting Apple", done: false }
   ];
   name = '';
   done = 0;
@@ -23,11 +23,11 @@ export class UsersComponent implements OnInit {
     return this.loginForm.controls;
   }
 
-  constructor(private formBuilder:FormBuilder) { }
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      firstName: ['',[Validators.required, Validators.minLength(4)]],
+      firstName: ['', [Validators.required, Validators.minLength(4)]],
       lastName: ['', [Validators.required, , Validators.minLength(4)]]
     })
   }
@@ -42,10 +42,10 @@ export class UsersComponent implements OnInit {
   // }
 
   toggle(index: number) {
-    if(!this.todos[index].done) {
-      this.done = this.done+1;
+    if (!this.todos[index].done) {
+      this.done = this.done + 1;
     } else {
-      this.done = this.done-1;
+      this.done = this.done - 1;
     }
     this.todos[index].done = !this.todos[index].done
   }
@@ -64,7 +64,7 @@ export class UsersComponent implements OnInit {
       return;
     }
     const fullName = `${this.f.firstName.value} ${this.f.lastName.value}`
-    this.todos.push({title: fullName, done: false})
+    this.todos.push(new User(fullName, false))
   }
 
 }
