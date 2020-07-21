@@ -1,15 +1,57 @@
-First name: <input (keyup.enter)="save()" (keyup)="inputYourName($event)"/>
+<!-- First name: <input (keyup.enter)="save()" (keyup)="inputYourName($event)"/>
 <br />
 Last name: <input #lastname (keyup.enter)="save()" (keyup)="inputLastName(lastname.value)"/>
 <br />
-<button  (keyup.enter)="save()" (click)="save()">Save</button>
-<br />
-Result = {{ name }}
-<br/>
-<p>Count = {{ done }} / {{users.length}}</p>
+<button  (keyup.enter)="save()" (click)="save()">Save</button> -->
 
-<ul *ngIf="show">
-    <li *ngFor="let user of users; index as i" [ngClass]="user.done ? 'cross':'uncross'" (click)="toggle(i)">
-        {{ user.title }}
+<div class="p-20">
+
+<p class="text-3xl">Todos = {{ done }} / {{todos.length}}</p>
+
+<div class="flex-auto mb-4">
+    
+<ul *ngIf="show" class="text-lg">
+    <li *ngFor="let user of todos; index as i" [ngClass]="user.done ? 'cross':'uncross'" (click)="toggle(i)">
+        - {{ user.title }}
     </li>
 </ul>
+
+</div>
+
+<form [formGroup]="loginForm" (ngSubmit)="saveData()" class="bg-gray-200">
+
+    <label class="my-6">
+        First Name:
+        <input type="text" formControlName="firstName">
+        <span *ngIf="loginForm.controls.firstName.errors && (loginForm.controls.firstName.touched || loginForm.controls.firstName.dirty)"  class="text-red-700">
+            <span  class="text-red-700" *ngIf="loginForm.controls.firstName.errors.required">
+                First name is required.
+            </span>
+            <span  class="text-red-700" *ngIf="!loginForm.controls.firstName.errors.required">
+                Minimum of 4 letters.
+            </span>
+        </span>
+    </label>
+    <br/>
+    <label>
+    Last Name:
+    <input type="text" formControlName="lastName">
+    <span *ngIf="loginForm.controls.lastName.errors && (loginForm.controls.lastName.dirty || loginForm.controls.lastName.touched)"  class="text-red-700">
+        <span class="text-red-700" *ngIf="loginForm.controls.lastName.errors.required">
+            Last name is required.
+        </span>
+
+        <span class="text-red-700" *ngIf="!loginForm.controls.lastName.errors.required">
+            Minimum of 4 letters.
+        </span>
+    </span>
+    </label>
+
+    <br/>
+    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold my-2 py-2 px-4 border border-blue-700 rounded">
+        Save
+    </button>
+
+</form>
+
+</div>

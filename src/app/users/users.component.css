@@ -5,3 +5,7 @@
 .uncross {
     text-decoration: none;
 }
+
+.errors {
+    color: red;
+}
